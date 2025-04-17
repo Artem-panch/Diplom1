@@ -249,6 +249,8 @@ footer {
     text-align: center;
     margin-top: 100px;
 }
+
+/* ===== Модальне вікно для AuthModal і AboutModal ===== */
 .auth-modal {
     position: fixed;
     top: 0;
@@ -261,9 +263,9 @@ footer {
     align-items: center;
     z-index: 999;
     backdrop-filter: blur(3px);
-  }
-  
-  .auth-content {
+}
+
+.auth-content {
     background: #fff;
     padding: 2rem;
     border-radius: 16px;
@@ -271,9 +273,21 @@ footer {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     position: relative;
     font-family: 'Segoe UI', sans-serif;
-  }
-  
-  .close-btn {
+    animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
     position: absolute;
     right: 16px;
     top: 16px;
@@ -283,21 +297,21 @@ footer {
     color: #555;
     cursor: pointer;
     transition: 0.2s ease-in-out;
-  }
-  
-  .close-btn:hover {
+}
+
+.close-btn:hover {
     transform: scale(1.2);
     color: #000;
-  }
-  
-  .auth-tabs {
+}
+
+.auth-tabs {
     display: flex;
     justify-content: center;
     margin-bottom: 1.5rem;
     gap: 1rem;
-  }
-  
-  .auth-tabs button {
+}
+
+.auth-tabs button {
     background: none;
     border: none;
     font-weight: bold;
@@ -307,33 +321,33 @@ footer {
     border-bottom: 2px solid transparent;
     transition: 0.2s;
     color: #444;
-  }
-  
-  .auth-tabs button.active {
+}
+
+.auth-tabs button.active {
     border-color: #222;
     color: #000;
-  }
-  
-  .auth-form {
+}
+
+.auth-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-  
-  .auth-form input {
+}
+
+.auth-form input {
     padding: 0.75rem 1rem;
     border: 1px solid #ddd;
     border-radius: 12px;
     font-size: 1rem;
     transition: border-color 0.2s;
-  }
-  
-  .auth-form input:focus {
+}
+
+.auth-form input:focus {
     border-color: #aaa;
     outline: none;
-  }
-  
-  .auth-form button {
+}
+
+.auth-form button {
     padding: 0.75rem;
     background: #222;
     color: white;
@@ -342,8 +356,8 @@ footer {
     border-radius: 12px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
-  }
-  
-  .auth-form button:hover {
+}
+
+.auth-form button:hover {
     background: #444;
-  }
+}

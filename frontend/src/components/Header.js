@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import Order from './Order';
 import AuthModal from './AuthModal';
+import AboutModal from './AboutModal';
 
 const showOrders = (props) => {
   let summa = 0;
@@ -16,24 +17,23 @@ const showOrders = (props) => {
   );
 };
 
-const showNothing = () => {
-  return (
-    <div className='empty'>
-      <h2>Товарів немає</h2>
-    </div>
-  );
-};
+const showNothing = () => (
+  <div className='empty'>
+    <h2>Товарів немає</h2>
+  </div>
+);
 
 export default function Header(props) {
   const [cartOpen, setCartOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   return (
     <header>
       <div>
         <span className='logo'>House staff</span>
         <ul className='nav'>
-          <li>Про нас</li>
+          <li onClick={() => setAboutOpen(true)}>Про нас</li>
           <li>Контакти</li>
           <li className='cabinet' onClick={() => setAuthOpen(true)}>Кабінет</li>
         </ul>
@@ -41,7 +41,6 @@ export default function Header(props) {
           onClick={() => setCartOpen(!cartOpen)}
           className={`shop-cart-button ${cartOpen ? 'active' : ''}`}
         />
-
         {cartOpen && (
           <div className='shop-cart'>
             {props.orders.length > 0 ? showOrders(props) : showNothing()}
@@ -49,7 +48,9 @@ export default function Header(props) {
         )}
       </div>
       <div className='presentation'></div>
+
       {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
+      {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
     </header>
   );
 }

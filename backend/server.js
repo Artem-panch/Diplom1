@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Подключение к БД
+// Підключення до БД
 const db = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
@@ -17,13 +17,13 @@ const db = mysql.createConnection({
 
 db.connect(err => {
   if (err) {
-    console.error('Ошибка подключения к базе данных:', err);
+    console.error('Помилка підключення до бази даних:', err);
     process.exit(1);
   }
-  console.log('Успешное подключение к базе данных');
+  console.log('Успішне підключення до бази даних');
 });
 
-// Таблица пользователей
+// Таблиця користувачів
 db.query(`
   CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,7 +33,7 @@ db.query(`
   )
 `);
 
-// 🔐 Регистрация
+// Реєстрація
 app.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -64,7 +64,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// 🔓 Вхід
+// Вхід
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
@@ -92,3 +92,4 @@ const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
