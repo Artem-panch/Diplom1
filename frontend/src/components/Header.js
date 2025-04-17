@@ -3,6 +3,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import Order from './Order';
 import AuthModal from './AuthModal';
 import AboutModal from './AboutModal';
+import ContactsModal from './ContactsModal';
 
 const showOrders = (props) => {
   let summa = 0;
@@ -27,6 +28,7 @@ export default function Header(props) {
   const [cartOpen, setCartOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [contactsOpen, setContactsOpen] = useState(false);
 
   return (
     <header>
@@ -34,13 +36,14 @@ export default function Header(props) {
         <span className='logo'>House staff</span>
         <ul className='nav'>
           <li onClick={() => setAboutOpen(true)}>Про нас</li>
-          <li>Контакти</li>
+          <li onClick={() => setContactsOpen(true)}>Контакти</li>
           <li className='cabinet' onClick={() => setAuthOpen(true)}>Кабінет</li>
         </ul>
         <FaShoppingCart
           onClick={() => setCartOpen(!cartOpen)}
           className={`shop-cart-button ${cartOpen ? 'active' : ''}`}
         />
+
         {cartOpen && (
           <div className='shop-cart'>
             {props.orders.length > 0 ? showOrders(props) : showNothing()}
@@ -48,9 +51,9 @@ export default function Header(props) {
         )}
       </div>
       <div className='presentation'></div>
-
       {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
       {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
+      {contactsOpen && <ContactsModal onClose={() => setContactsOpen(false)} />}
     </header>
   );
 }
