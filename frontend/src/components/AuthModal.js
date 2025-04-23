@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function AuthModal({ onClose }) {
+export default function AuthModal({ onClose, onLoginSuccess }) {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -24,9 +24,14 @@ export default function AuthModal({ onClose }) {
         body: JSON.stringify(formData)
       });
       const result = await response.json();
-      setMessage(result.message || result.error);
+
+      if (response.ok && result.user) {
+        onLoginSuccess(result.user); // Успішний вхід
+      } else {
+        setMessage(result.message || result.error);
+      }
     } catch (error) {
-      setMessage('Ошибка запроса');
+      setMessage('Помилка запиту');
     }
   };
 
