@@ -361,3 +361,19 @@ footer {
 .auth-form button:hover {
     background: #444;
 }
+
+.user-menu {
+    position: relative;
+    cursor: pointer;
+  }
+  
+ 
+  .logout-button {
+    font-weight: 400;
+    font-size: 14px;
+    background: none;
+    border: none;
+    color: #222222;
+    font-weight: bold;
+    cursor: pointer;
+  }

@@ -25,10 +25,13 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
       });
       const result = await response.json();
 
-      if (response.ok && result.user) {
-        onLoginSuccess(result.user); // Успішний вхід
+      if (response.ok) {
+        setMessage(result.message);
+        if (isLogin && onLoginSuccess) {
+          onLoginSuccess(result.user); // ✅ передаємо user назад
+        }
       } else {
-        setMessage(result.message || result.error);
+        setMessage(result.error || 'Помилка');
       }
     } catch (error) {
       setMessage('Помилка запиту');
@@ -46,10 +49,28 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
 
         <form className='auth-form' onSubmit={handleSubmit}>
           {!isLogin && (
-            <input type='text' name='name' placeholder="Ім'я" required onChange={handleChange} />
+            <input
+              type='text'
+              name='name'
+              placeholder="Ім'я"
+              required
+              onChange={handleChange}
+            />
           )}
-          <input type='email' name='email' placeholder='Email' required onChange={handleChange} />
-          <input type='password' name='password' placeholder='Пароль' required onChange={handleChange} />
+          <input
+            type='email'
+            name='email'
+            placeholder='Email'
+            required
+            onChange={handleChange}
+          />
+          <input
+            type='password'
+            name='password'
+            placeholder='Пароль'
+            required
+            onChange={handleChange}
+          />
           <button type='submit'>{isLogin ? 'Увійти' : 'Зареєструватися'}</button>
           {message && <p className='auth-message'>{message}</p>}
         </form>
