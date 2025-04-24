@@ -40,7 +40,7 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
 
   return (
     <div className='auth-modal'>
-      <div className='auth-content'>
+      <div className='auth-content auth-extension'>
         <button className='close-btn' onClick={onClose}>×</button>
         <div className='auth-tabs'>
           <button onClick={() => setIsLogin(true)} className={isLogin ? 'active' : ''}>Увійти</button>

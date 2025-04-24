@@ -269,11 +269,14 @@ footer {
     background: #fff;
     padding: 2rem;
     border-radius: 16px;
-    width: 360px;
+    width: 800px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     position: relative;
     font-family: 'Segoe UI', sans-serif;
     animation: slideIn 0.3s ease forwards;
+}
+.auth-extension{
+    width: 320px;
 }
 
 @keyframes slideIn {
@@ -377,3 +380,23 @@ footer {
     font-weight: bold;
     cursor: pointer;
   }
+    /* AboutModal */
+    .about_us_head, .about_us_text, .about_us_span{
+    margin:5px;
+    color: #333333;
+    }
+    .about_us_head{
+    margin-bottom: 20px;
+    }
+    .about_us_span{
+	font-weight: 600;
+	display: block;
+	font-size: 20px;
+}
+    .about_us_text{
+	font-size: 14px;
+}
+    .retreat{
+	margin: 10px 0;
+	text-align: center;
+}
