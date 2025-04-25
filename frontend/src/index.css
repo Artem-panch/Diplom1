@@ -400,3 +400,39 @@ footer {
 	margin: 10px 0;
 	text-align: center;
 }
+ /* contact section */
+ .contacts-content {
+    color: #333333;
+  }
+  
+  .contact-link {
+    color: #333333;
+    text-decoration: underline;
+  }
+  
+  .working-hours {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .working-hours li {
+    margin-bottom: 5px;
+  }
+  
+  .social-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .social-btn {
+    color: #333333;
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .social-btn:hover {
+    color: #5555ff;
+    transform: scale(1.2);
+  }
