@@ -436,3 +436,123 @@ footer {
     color: #5555ff;
     transform: scale(1.2);
   }
+  /* Адаптивність для планшетів */
+@media (max-width: 1024px) {
+    .wrapper {
+        width: 90%;
+        margin: 30px auto;
+    }
+
+    main .item {
+        width: 45%;
+    }
+
+    header .presentation::after,
+    header .presentation::before {
+        left: 30px;
+    }
+
+    .auth-content {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+
+    header .logo {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    header ul.nav {
+        float: none;
+        display: block;
+        margin-top: 10px;
+    }
+
+    header ul.nav li {
+        display: block;
+        margin: 8px 0;
+    }
+
+    header .shop-cart-button {
+        float: none;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .categories {
+        text-align: center;
+    }
+
+    .categories div {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    /* Додаю адаптацію для товарів */
+    .items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .item {
+        flex: 0 0 100%; /* Один товар на весь рядок */
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        text-align: center;
+    }
+
+    header .logo {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    header ul.nav {
+        float: none;
+        display: block;
+        margin-top: 8px;
+    }
+
+    header ul.nav li {
+        display: block;
+        margin: 6px 0;
+    }
+
+    header .shop-cart-button {
+        float: none;
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+    .categories {
+        text-align: center;
+    }
+
+    .categories div {
+        display: inline-block;
+        margin: 4px;
+    }
+
+    /* Повтор адаптації для ще меншого екрану */
+    .items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
