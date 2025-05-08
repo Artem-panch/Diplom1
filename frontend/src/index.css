@@ -436,6 +436,26 @@ footer {
     color: #5555ff;
     transform: scale(1.2);
   }
+
+  .checkout-btn {
+    background: #5fa36a;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.checkout-btn:hover {
+    background: #4d8e59;
+}
+.placing-an-order-head{
+    text-align: center;
+    margin-bottom: 20px;
+}
   /* Адаптивність для планшетів */
 @media (max-width: 1024px) {
     .wrapper {

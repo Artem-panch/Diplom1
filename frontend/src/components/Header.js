@@ -4,8 +4,9 @@ import Order from './Order';
 import AuthModal from './AuthModal';
 import AboutModal from './AboutModal';
 import ContactsModal from './ContactsModal';
+import CheckoutModal from './CheckoutModal';
 
-const showOrders = (props) => {
+const showOrders = (props, onCheckout) => {
   let summa = 0;
   props.orders.forEach(el => summa += Number.parseFloat(el.price));
   return (
@@ -14,6 +15,7 @@ const showOrders = (props) => {
         <Order onDelete={props.onDelete} key={el.id} item={el} />
       ))}
       <p className='summa'>Сума: {new Intl.NumberFormat().format(summa)}$</p>
+      <button className='checkout-btn' onClick={onCheckout}>Оформити замовлення</button>
     </div>
   );
 };
@@ -29,16 +31,18 @@ export default function Header(props) {
   const [authOpen, setAuthOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [contactsOpen, setContactsOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('user');
     return saved ? JSON.parse(saved) : null;
   });
+
   const [hoverUser, setHoverUser] = useState(false);
 
-  // ✅ Ця функція викликається після успішного входу
   const handleLoginSuccess = (userData) => {
     setUser(userData);
-    setHoverUser(false); // <-- додано: не показує "Вийти" одразу
+    setHoverUser(false);
     localStorage.setItem('user', JSON.stringify(userData));
     setAuthOpen(false);
     alert('Вхід успішний!');
@@ -48,6 +52,11 @@ export default function Header(props) {
     setUser(null);
     localStorage.removeItem('user');
     alert('Ви вийшли з акаунту');
+  };
+
+  const handleOpenCheckout = () => {
+    setCartOpen(false); // Закриває кошик
+    setCheckoutOpen(true);
   };
 
   return (
@@ -80,17 +89,19 @@ export default function Header(props) {
         />
         {cartOpen && (
           <div className='shop-cart'>
-            {props.orders.length > 0 ? showOrders(props) : showNothing()}
+            {props.orders.length > 0
+              ? showOrders(props, handleOpenCheckout)
+              : showNothing()}
           </div>
         )}
       </div>
 
       <div className='presentation'></div>
 
-      
       {authOpen && <AuthModal onClose={() => setAuthOpen(false)} onLoginSuccess={handleLoginSuccess} />}
       {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
       {contactsOpen && <ContactsModal onClose={() => setContactsOpen(false)} />}
+      {checkoutOpen && <CheckoutModal onClose={() => setCheckoutOpen(false)} />} 
     </header>
   );
 }
