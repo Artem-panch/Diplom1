@@ -513,7 +513,7 @@ footer {
         margin: 5px;
     }
 
-    /* Додаю адаптацію для товарів */
+    
     .items {
         display: flex;
         flex-wrap: wrap;
@@ -521,7 +521,7 @@ footer {
     }
 
     .item {
-        flex: 0 0 100%; /* Один товар на весь рядок */
+        flex: 0 0 100%; 
         max-width: 100%;
         margin-bottom: 20px;
     }

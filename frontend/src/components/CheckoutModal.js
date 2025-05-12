@@ -100,6 +100,7 @@ export default function CheckoutModal({ onClose, orders }) {
             value={formData.phone}
             onChange={handleChange}
           />
+          <p>Оплата при отриманні замовлення.</p>
           <p>Сума замовлення: {totalPrice.toFixed(2)} $</p>
           <button type="submit" className="submit-btn">Оформити</button>
         </form>
