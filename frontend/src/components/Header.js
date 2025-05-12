@@ -101,7 +101,12 @@ export default function Header(props) {
       {authOpen && <AuthModal onClose={() => setAuthOpen(false)} onLoginSuccess={handleLoginSuccess} />}
       {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
       {contactsOpen && <ContactsModal onClose={() => setContactsOpen(false)} />}
-      {checkoutOpen && <CheckoutModal onClose={() => setCheckoutOpen(false)} />} 
+      {checkoutOpen && (
+  <CheckoutModal
+    onClose={() => setCheckoutOpen(false)}
+    orders={props.orders}
+  />
+)}
     </header>
   );
 }

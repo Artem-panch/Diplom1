@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../index.css';
 
-export default function CheckoutModal({ onClose }) {
+export default function CheckoutModal({ onClose, orders }) {
   const [formData, setFormData] = useState({
     surname: '',
     name: '',
@@ -9,6 +9,8 @@ export default function CheckoutModal({ onClose }) {
     post: '',
     phone: '',
   });
+
+  const totalPrice = orders.reduce((sum, item) => sum + parseFloat(item.price), 0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,26 +20,43 @@ export default function CheckoutModal({ onClose }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Простенька перевірка
-    if (
-      !formData.surname.trim() ||
-      !formData.name.trim() ||
-      !formData.city.trim() ||
-      !formData.post.trim() ||
-      !formData.phone.trim()
-    ) {
+    const { surname, name, city, post, phone } = formData;
+
+    if (!surname || !name || !city || !post || !phone) {
       alert('Будь ласка, заповніть всі поля');
       return;
     }
 
-    onClose(); // Закрити модалку
-    alert('Ваше замовлення в обробці');
+    try {
+      const response = await fetch('http://localhost:3001/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          surname,
+          name,
+          city,
+          post,
+          phone,
+          items: orders,
+          totalPrice
+        })
+      });
 
-    // (опційно) Тут можна відправити formData на бекенд
-    console.log('Дані замовлення:', formData);
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Замовлення успішно оформлене!');
+        onClose();
+      } else {
+        alert(data.error || 'Помилка при оформленні замовлення');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Помилка зʼєднання з сервером');
+    }
   };
 
   return (
@@ -81,6 +100,7 @@ export default function CheckoutModal({ onClose }) {
             value={formData.phone}
             onChange={handleChange}
           />
+          <p>Сума замовлення: {totalPrice.toFixed(2)} $</p>
           <button type="submit" className="submit-btn">Оформити</button>
         </form>
       </div>

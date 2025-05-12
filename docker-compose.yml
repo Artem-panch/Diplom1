@@ -13,6 +13,8 @@ services:
       - DB_USER=root
       - DB_PASSWORD=rootpassword
       - DB_NAME=mydatabase
+      - MYSQL_CHARSET=utf8mb4
+      - MYSQL_COLLATION=utf8mb4_unicode_ci
     depends_on:
       - mysql
 

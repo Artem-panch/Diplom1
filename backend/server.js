@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-const bcrypt = require('bcryptjs'); 
+const bcrypt = require('bcryptjs');
 const app = express();
 
 app.use(cors());
@@ -21,6 +21,7 @@ db.connect(err => {
     process.exit(1);
   }
   console.log('Успішне підключення до бази даних');
+  db.query("SET NAMES 'utf8mb4'");
 });
 
 // Таблиця користувачів
@@ -31,6 +32,21 @@ db.query(`
     email VARCHAR(255) UNIQUE,
     password VARCHAR(255)
   )
+`);
+
+// Таблиця замовлень
+db.query(`
+  CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    surname VARCHAR(255),
+    phone VARCHAR(20),
+    city VARCHAR(100),
+    post VARCHAR(50),
+    items TEXT,
+    total_price DECIMAL(10,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 `);
 
 // Реєстрація
@@ -88,8 +104,31 @@ app.post('/login', (req, res) => {
   );
 });
 
+// Замовлення
+app.post('/order', (req, res) => {
+  const { name, surname, phone, city, post, items, totalPrice } = req.body;
+
+  if (!name || !surname || !phone || !city || !post || !items || !totalPrice) {
+    return res.status(400).json({ error: 'Заповніть усі поля' });
+  }
+
+   const simplifiedItems = items.map(item => item.title);
+  const itemsJson = JSON.stringify(simplifiedItems);
+
+  db.query(
+    'INSERT INTO orders (name, surname, phone, city, post, items, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [name, surname, phone, city, post, itemsJson, totalPrice],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Помилка при збереженні замовлення' });
+      }
+      res.status(201).json({ message: 'Замовлення успішно збережене' });
+    }
+  );
+});
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
