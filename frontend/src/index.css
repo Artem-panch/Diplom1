@@ -13,8 +13,11 @@ body{
 }
 
 .wrapper{
-    width: 1280px;
     margin: 50px auto;
+    max-width: 1280px;
+    width: 100%;
+    padding: 0 50px;
+    box-sizing: border-box;
 }
 
 header{position: relative;}
@@ -461,6 +464,7 @@ footer {
     .wrapper {
         width: 90%;
         margin: 30px auto;
+        padding: 0;
     }
 
     main .item {
@@ -497,7 +501,10 @@ footer {
         display: block;
         margin: 8px 0;
     }
-
+    header .shop-cart{
+        width: 370px;
+        top:160px;
+    }
     header .shop-cart-button {
         float: none;
         display: inline-block;
@@ -553,7 +560,7 @@ footer {
         display: inline-block;
         margin-top: 8px;
     }
-
+    
     .categories {
         text-align: center;
     }
