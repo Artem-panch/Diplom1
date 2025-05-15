@@ -66,6 +66,8 @@ header .shop-cart {
     z-index: 1000;
     padding: 20px;
     padding-bottom: 0;
+    border-radius: 10px;
+    border: 1px solid black;
 }
 
 header .shop-cart .item{
@@ -177,10 +179,11 @@ header .presentation::before{
     background: rgb(0,0,0,0.8);
     z-index: 9999;
     overflow: auto;
+    padding: 20px;
 }
 
 .full-item > div{
-    width: 600px;
+    max-width: 600px;
     position: relative;
     margin: 10% auto;
     padding: 40px 30px;
