@@ -10,8 +10,11 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      /* Масив - кошик */
       orders: [],
+      /* Відсортований масив - відображення товарів на даний момент часу */
       currentItems: [],
+      /* Масив - всі доступні товари */
       items:[
         {
           id:1,
@@ -65,6 +68,7 @@ class App extends React.Component {
       showFullItem: false,
       fullItem: {}
     }
+    /* Привязування методів до контексту класу */
     this.state.currentItems = this.state.items
     this.addToOrder = this.addToOrder.bind(this)
     this.deleteOrder = this.deleteOrder.bind(this)
@@ -83,25 +87,32 @@ class App extends React.Component {
     )
   };
 
+  /* Викликає повне відображення товару */
   onShowItem(item){
     this.setState({fullItem: item})
     this.setState({showFullItem: !this.state.showFullItem})
   }
 
+  /* Фільтрація товарів за категоріями */
   chooseCategory(category){
     if(category==='all') {
+      /* Показує всі товари */
       this.setState({currentItems: this.state.items})
       return
     }
+    
+    /* Показує товари певної категорії */
     this.setState({
       currentItems: this.state.items.filter(el =>el.category===category)
     })
   }
 
+  /* Видаляє товар з кошику */
   deleteOrder(id) {
     this.setState({orders: this.state.orders.filter(el=>el.id !== id)})
   }
 
+  /* Додає товар в кошик */
   addToOrder(item) {
     let isInArray = false
     this.state.orders.forEach(el => {

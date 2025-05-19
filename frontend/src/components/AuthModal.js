@@ -12,7 +12,7 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
+/* Обробник надсилання форми */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = isLogin ? 'http://localhost:3001/login' : 'http://localhost:3001/register';
@@ -28,7 +28,7 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
       if (response.ok) {
         setMessage(result.message);
         if (isLogin && onLoginSuccess) {
-          onLoginSuccess(result.user); // ✅ передаємо user назад
+          onLoginSuccess(result.user); 
         }
       } else {
         setMessage(result.error || 'Помилка');

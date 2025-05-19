@@ -11,7 +11,7 @@ export default function CheckoutModal({ onClose, orders }) {
   });
 
   const totalPrice = orders.reduce((sum, item) => sum + parseFloat(item.price), 0);
-
+/* обробка змін значень у формі */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -31,6 +31,7 @@ export default function CheckoutModal({ onClose, orders }) {
     }
 
     try {
+      /* Відправка запиту на сервер */
       const response = await fetch('http://localhost:3001/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

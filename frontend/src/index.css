@@ -256,7 +256,7 @@ footer {
     margin-top: 100px;
 }
 
-/* ===== Модальне вікно для AuthModal і AboutModal ===== */
+/* Модальне вікно */
 .auth-modal {
     position: fixed;
     top: 0;
@@ -483,7 +483,7 @@ footer {
         width: 90%;
     }
 }
-
+ /* Адаптація для телефонів */
 @media (max-width: 768px) {
     header {
         text-align: center;

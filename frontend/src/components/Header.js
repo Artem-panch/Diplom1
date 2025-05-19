@@ -6,6 +6,7 @@ import AboutModal from './AboutModal';
 import ContactsModal from './ContactsModal';
 import CheckoutModal from './CheckoutModal';
 
+/* Функція яка відповідає за вивід товарів у кошику */
 const showOrders = (props, onCheckout) => {
   let summa = 0;
   props.orders.forEach(el => summa += Number.parseFloat(el.price));
@@ -19,7 +20,7 @@ const showOrders = (props, onCheckout) => {
     </div>
   );
 };
-
+/* Функція для повідомлення, якщо кошик пустий */
 const showNothing = () => (
   <div className='empty'>
     <h2>Товарів немає</h2>
@@ -27,12 +28,15 @@ const showNothing = () => (
 );
 
 export default function Header(props) {
+
+  /* Стани для відкриття модальних вікон */
   const [cartOpen, setCartOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [contactsOpen, setContactsOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
+  /* Стан користувача, авторизований чи ні*/
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('user');
     return saved ? JSON.parse(saved) : null;
@@ -40,6 +44,7 @@ export default function Header(props) {
 
   const [hoverUser, setHoverUser] = useState(false);
 
+  /* Обробник успішного входу */
   const handleLoginSuccess = (userData) => {
     setUser(userData);
     setHoverUser(false);
@@ -48,12 +53,14 @@ export default function Header(props) {
     alert('Вхід успішний!');
   };
 
+  /* Обробник виходу з аккаунту */
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('user');
     alert('Ви вийшли з акаунту');
   };
 
+  /* Обробник відкриття замовлення */
   const handleOpenCheckout = () => {
     setCartOpen(false); // Закриває кошик
     setCheckoutOpen(true);
